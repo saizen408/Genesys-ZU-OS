@@ -1,0 +1,27 @@
+From 9c43772ffa529fdda3a47ba97e53d4cf08c2fbb3 Mon Sep 17 00:00:00 2001
+From: eric owusu <llkoole7@gmail.com>
+Date: Fri, 6 Oct 2023 20:45:55 -0700
+Subject: [PATCH] added board-specific reference frequency
+
+Signed-off-by: eric owusu <llkoole7@gmail.com>
+---
+ lib/sw_apps/zynqmp_dram_test/src/xmt_common.h | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/lib/sw_apps/zynqmp_dram_test/src/xmt_common.h b/lib/sw_apps/zynqmp_dram_test/src/xmt_common.h
+index 6a5736c9e9..662ad38916 100644
+--- a/lib/sw_apps/zynqmp_dram_test/src/xmt_common.h
++++ b/lib/sw_apps/zynqmp_dram_test/src/xmt_common.h
+@@ -82,8 +82,12 @@ extern "C" {
+ #ifdef XPAR_PSU_PSS_REF_CLK_FREQ_HZ
+ #define XMT_REF_FREQ				(XPAR_PSU_PSS_REF_CLK_FREQ_HZ / 1000000.0)
+ #else
++#if defined(XPS_BOARD_GZU_3EG) || defined(XPS_BOARD_GZU_5EV)
++#define XMT_REF_FREQ				30.0
++#else
+ #define XMT_REF_FREQ				33.3333
+ #endif
++#endif
+ 
+ /* DDR Controller Register Definitions */
+ #define XMT_DDRC_MSTR				0xFD070000

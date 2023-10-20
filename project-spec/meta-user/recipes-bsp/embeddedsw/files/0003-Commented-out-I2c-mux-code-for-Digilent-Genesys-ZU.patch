@@ -1,0 +1,32 @@
+From da553a84024719f7c8a6e6b756b990db60c01c5b Mon Sep 17 00:00:00 2001
+From: eric owusu <llkoole7@gmail.com>
+Date: Fri, 6 Oct 2023 20:50:01 -0700
+Subject: [PATCH] Commented out I2c mux code for Digilent Genesys ZU. Wrong
+ Xilinx assumption that all boards have an I2C mux on the DIMM SPD
+
+Signed-off-by: eric owusu <llkoole7@gmail.com>
+---
+ lib/sw_apps/zynqmp_fsbl/src/xfsbl_ddr_init.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/lib/sw_apps/zynqmp_fsbl/src/xfsbl_ddr_init.c b/lib/sw_apps/zynqmp_fsbl/src/xfsbl_ddr_init.c
+index 2043212e6e..f5260a474e 100644
+--- a/lib/sw_apps/zynqmp_fsbl/src/xfsbl_ddr_init.c
++++ b/lib/sw_apps/zynqmp_fsbl/src/xfsbl_ddr_init.c
+@@ -6644,7 +6644,7 @@ static u32 XFsbl_IicReadSpdEeprom(u8 *SpdData)
+ 		UStatus = XFSBL_FAILURE;
+ 		goto END;
+ 	}
+-
++#if !defined(XPS_BOARD_GZU_3EG) && !defined(XPS_BOARD_GZU_5EV)
+ 	/*
+ 	 * Configure I2C Mux to select DDR4 SODIMM Slave
+ 	 * 0x08U - Enable DDR4 SODIMM module
+@@ -6684,6 +6684,7 @@ static u32 XFsbl_IicReadSpdEeprom(u8 *SpdData)
+ 		UStatus = XFSBL_FAILURE;
+ 		goto END;
+ 	}
++#endif //!XPS_BOARD_GZU_3EG && !XPS_BOARD_GZU_5EV
+ 
+ 	/*
+ 	 * Set SODIMM control address to enable access to lower
