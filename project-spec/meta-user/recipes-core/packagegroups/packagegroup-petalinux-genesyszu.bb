@@ -3,7 +3,6 @@ DESCRIPTION = "PetaLinux Genesys ZU-5EV supported Packages"
 inherit packagegroup
 
 NETWORK_PACKAGES = " \
-    init-ifupdown \
     wpa-supplicant \
     iw \
     openssl \

@@ -1,0 +1,12 @@
+[Match]
+Name=wlan0
+KernelCommandLine=!nfsroot
+
+[Network]
+DHCP=yes
+
+[DHCP4]
+RouteMetric=600
+
+[IPv6AcceptRA]
+RouteMetric=600
